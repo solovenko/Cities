@@ -17,18 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.96465244418619589" blue="0.73569423639781839" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="eC5-QN-ucs"/>
                     <connections>
-                        <segue destination="9BD-y2-dZz" kind="show" id="nvV-ki-Hte"/>
+                        <segue destination="9BD-y2-dZz" kind="show" identifier="toGameWindowSegue" id="nvV-ki-Hte"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izB-8N-OCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="-172"/>
+            <point key="canvasLocation" x="665" y="-162"/>
         </scene>
-        <!--View Controller-->
+        <!--Главное окно-->
         <scene sceneID="62o-Rn-WKc">
             <objects>
-                <viewController id="9BD-y2-dZz" sceneMemberID="viewController">
+                <viewController title="Главное окно" id="9BD-y2-dZz" customClass="ASGameplayController" customModule="Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aVJ-Gh-Qax"/>
                         <viewControllerLayoutGuide type="bottom" id="SzX-CG-hOS"/>
@@ -41,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cth-TM-XYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="945" y="589"/>
+            <point key="canvasLocation" x="1406" y="591"/>
         </scene>
     </scenes>
 </document>

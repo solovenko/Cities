@@ -40,7 +40,7 @@ class ASLoginController: UIViewController {
         submitButton.layer.borderWidth = 0.5
         submitButton.layer.cornerRadius = 5.0
         submitButton.layer.backgroundColor = UIColor.blueColor().CGColor
-        submitButton.addTarget(self, action: "buttonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+        submitButton.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         
         player1NameLabel.text = "Введите имя игрока 1:"
         player1NameLabel.font = player1NameLabel.font.fontWithSize(myFontSize)
@@ -101,18 +101,25 @@ class ASLoginController: UIViewController {
         player2NameText.text = ""
     }
     
+    func isAllowToSegue(player1 player1Name: String?, player2 player2Name: String?) -> Bool {
+        
+        var result = false
+        
+        
+        
+        return result
+    }
+    
+    
+    // MARK: - Actions
     func buttonTapped(sender : UIButton!) {
+        print("Ok Action!")
         
-//        let newAlertView = UIAlertController()
-//        newAlertView.addB
-        
-        
-        let alertView = UIAlertView();
+        var alertView = UIAlertView();
         alertView.addButtonWithTitle("Ok");
-        alertView.title = "title";
-        alertView.message = "message";
+        alertView.title = "Test alert";
+        alertView.message = "Alert!";
         alertView.show();
-        
 //        sender.enabled = false
     }
     

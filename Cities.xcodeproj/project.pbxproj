@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D5291D6B1BCFD1BE00C7D8F7 /* ASGameplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D6A1BCFD1BE00C7D8F7 /* ASGameplayController.swift */; settings = {ASSET_TAGS = (); }; };
 		D52C47021BCF8C7A00CBBDB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52C47011BCF8C7A00CBBDB7 /* AppDelegate.swift */; };
 		D52C47071BCF8C7A00CBBDB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D52C47051BCF8C7A00CBBDB7 /* Main.storyboard */; };
 		D52C47091BCF8C7A00CBBDB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D52C47081BCF8C7A00CBBDB7 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D5291D6A1BCFD1BE00C7D8F7 /* ASGameplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASGameplayController.swift; sourceTree = "<group>"; };
 		D52C46FE1BCF8C7A00CBBDB7 /* Cities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52C47011BCF8C7A00CBBDB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D52C47061BCF8C7A00CBBDB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,9 +101,10 @@
 		D52C47001BCF8C7A00CBBDB7 /* Cities */ = {
 			isa = PBXGroup;
 			children = (
-				D52C472F1BCF90A500CBBDB7 /* ASPlayer.swift */,
 				D52C47011BCF8C7A00CBBDB7 /* AppDelegate.swift */,
 				D52C47311BCF971200CBBDB7 /* ASLoginController.swift */,
+				D5291D6A1BCFD1BE00C7D8F7 /* ASGameplayController.swift */,
+				D52C472F1BCF90A500CBBDB7 /* ASPlayer.swift */,
 				D52C47051BCF8C7A00CBBDB7 /* Main.storyboard */,
 				D52C47081BCF8C7A00CBBDB7 /* Assets.xcassets */,
 				D52C470A1BCF8C7A00CBBDB7 /* LaunchScreen.storyboard */,
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D52C47301BCF90A500CBBDB7 /* ASPlayer.swift in Sources */,
+				D5291D6B1BCFD1BE00C7D8F7 /* ASGameplayController.swift in Sources */,
 				D52C47021BCF8C7A00CBBDB7 /* AppDelegate.swift in Sources */,
 				D52C47321BCF971200CBBDB7 /* ASLoginController.swift in Sources */,
 			);
@@ -489,6 +493,7 @@
 				D52C47281BCF8C7B00CBBDB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D52C47291BCF8C7B00CBBDB7 /* Build configuration list for PBXNativeTarget "CitiesTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +502,7 @@
 				D52C472B1BCF8C7B00CBBDB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D52C472C1BCF8C7B00CBBDB7 /* Build configuration list for PBXNativeTarget "CitiesUITests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +511,7 @@
 				D52C472E1BCF8C7B00CBBDB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
