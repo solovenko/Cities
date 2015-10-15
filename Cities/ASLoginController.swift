@@ -40,6 +40,7 @@ class ASLoginController: UIViewController {
         submitButton.layer.borderWidth = 0.5
         submitButton.layer.cornerRadius = 5.0
         submitButton.layer.backgroundColor = UIColor.blueColor().CGColor
+        submitButton.addTarget(self, action: "buttonTapped", forControlEvents: UIControlEvents.TouchUpInside)
         
         player1NameLabel.text = "Введите имя игрока 1:"
         player1NameLabel.font = player1NameLabel.font.fontWithSize(myFontSize)
@@ -100,9 +101,19 @@ class ASLoginController: UIViewController {
         player2NameText.text = ""
     }
     
-    @IBAction func buttonTapped(sender : UIButton!) {
+    func buttonTapped(sender : UIButton!) {
         
-        sender.enabled = false
+//        let newAlertView = UIAlertController()
+//        newAlertView.addB
+        
+        
+        let alertView = UIAlertView();
+        alertView.addButtonWithTitle("Ok");
+        alertView.title = "title";
+        alertView.message = "message";
+        alertView.show();
+        
+//        sender.enabled = false
     }
     
     
