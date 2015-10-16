@@ -8,10 +8,13 @@
 
 import UIKit
 
-let myFontSize: CGFloat = 10.0
+let myFontSize: CGFloat = 14.0
 
 
 class ASLoginController: UIViewController {
+    
+    var player1: ASPlayer!
+    var player2: ASPlayer!
     
     var player1NameLabel: UILabel!
     var player1NameText: UITextField!
@@ -21,8 +24,12 @@ class ASLoginController: UIViewController {
     
     var submitButton: UIButton!
     
+    // MARK: - Initialized before appear
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        player1 = ASPlayer()
+        player2 = ASPlayer()
         
         submitButton = UIButton()
         
@@ -46,11 +53,13 @@ class ASLoginController: UIViewController {
         player1NameLabel.font = player1NameLabel.font.fontWithSize(myFontSize)
         player1NameText.font = player1NameText.font!.fontWithSize(myFontSize)
         player1NameText.layer.backgroundColor = UIColor.whiteColor().CGColor
+        player1NameText.delegate = self
         
         player2NameLabel.text = "Введите имя игрока 2:"
         player2NameLabel.font = player2NameLabel.font.fontWithSize(myFontSize)
         player2NameText.font = player2NameText.font!.fontWithSize(myFontSize)
         player2NameText.layer.backgroundColor = UIColor.whiteColor().CGColor
+        player2NameText.delegate = self
         
         view.addSubview(submitButton)
         view.addSubview(player1NameLabel)
@@ -85,7 +94,7 @@ class ASLoginController: UIViewController {
         player1NameText.frame = CGRectMake(
             (view.bounds.width - size.width) / 2 + size.width * 0.75,
             (view.bounds.height - size.height) / 2 - size.height, size.width, size.height)
-        player1NameText.text = ""
+
         
         //Player 2
         size = player2NameLabel.sizeThatFits(CGSizeZero)
@@ -98,40 +107,114 @@ class ASLoginController: UIViewController {
         player2NameText.frame = CGRectMake(
             (view.bounds.width - size.width) / 2 + size.width * 0.75,
             (view.bounds.height - size.height) / 2 + size.height, size.width, size.height)
-        player2NameText.text = ""
-    }
-    
-    func isAllowToSegue(player1 player1Name: String?, player2 player2Name: String?) -> Bool {
         
-        var result = false
-        
-        
-        
-        return result
-    }
-    
-    
-    // MARK: - Actions
-    func buttonTapped(sender : UIButton!) {
-        print("Ok Action!")
-        
-        var alertView = UIAlertView();
-        alertView.addButtonWithTitle("Ok");
-        alertView.title = "Test alert";
-        alertView.message = "Alert!";
-        alertView.show();
-//        sender.enabled = false
     }
     
     
     /*
+     *   Проверка на правильность ввода имен игроками
+    */
+    func isAllowToSegue(player1 player1Name: String?, player2 player2Name: String?) -> Bool {
+        
+        var isAllowToSegue = true
+        
+        if let name1 = player1Name where name1.characters.count > 2 {
+            //Если не nil
+            player1NameLabel.text = "Привет, \(name1)"
+        } else {
+            isAllowToSegue = false
+            player1NameLabel.text = "Некорректное имя игрока 1!"
+        }
+        
+        if let name2 = player2Name where name2.characters.count > 2 {
+            //Если не nil
+            player2NameLabel.text = "Привет, \(name2)"
+        } else {
+            isAllowToSegue = false
+            player2NameLabel.text = "Некорректное имя игрока 2!"
+        }
+        
+        if isAllowToSegue {
+            
+            player1.name = player1Name!
+            player1.score = 0
+            player1.skips = 0
+            player2.name = player2Name!
+            player2.score = 0
+            player2.score = 0
+        }
+        
+        return isAllowToSegue
+    }
+    
+    // MARK: - Actions
+    func buttonTapped(sender : UIButton!) {
+        
+        player1NameText.endEditing(true)
+        player2NameText.endEditing(true)
+        
+        if isAllowToSegue(player1: player1NameText.text, player2: player2NameText.text){
+            
+            performSegueWithIdentifier("toGameWindowSegue", sender: self)
+        }
+        
+        
+//        if var name1 = player1NameText.text {
+//            if var name2 = player2NameText.text {
+//                
+//                var alertView = UIAlertView();
+//                alertView.addButtonWithTitle("Ok");
+//                alertView.title = "Welcome!";
+//                alertView.message = "Hello, \(name1) and \(name2)!";
+//                alertView.show();
+////                submitButton.setTitle("fail", forState: UIControlState.Normal)
+//                
+//            }
+//        }
+    }
+    
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
+        
+//        let gameplayView: ASGameplayController = segue.destinationViewController
+        
+        if segue.identifier == "toGameWindowSegue" {
+            var gameplayView = segue.destinationViewController as! ASGameplayController;
+            
+            gameplayView.players = (firstPlayer: player1, secondPlayer: player2)
+            
+        }
+        
+        /*
+            ASGameplayController* second = segue.destinationController;
+            second.representedObject = self.players;
+            [[[[self view] window] windowController] close];
+        */
 
+        
+    }
+    
+    
+
+}
+
+// MARK: - Extension
+extension ASLoginController: UITextFieldDelegate {
+    
+//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+//        if let touch = touches.first as? UITouch {
+//            view.endEditing(true)
+//        }
+//        super.touchesBegan(touches, withEvent: event)
+//    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
 }

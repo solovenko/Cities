@@ -9,6 +9,8 @@
 import UIKit
 
 class ASGameplayController: UIViewController {
+    
+    var players: (ASPlayer!,ASPlayer!)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,13 @@ class ASGameplayController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+        var alertView = UIAlertView();
+                        alertView.addButtonWithTitle("Ok");
+                        alertView.title = "Welcome!";
+                        alertView.message = "Hello, \(players.0) and \(players.1)!";
+                        alertView.show();
+
         
     }
 
