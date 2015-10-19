@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="77" y="-172"/>
         </scene>
-        <!--View Controller-->
+        <!--Главное окно-->
         <scene sceneID="62o-Rn-WKc">
             <objects>
-                <viewController id="9BD-y2-dZz" sceneMemberID="viewController">
+                <viewController title="Главное окно" id="9BD-y2-dZz" customClass="ASGameplayController" customModule="Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aVJ-Gh-Qax"/>
                         <viewControllerLayoutGuide type="bottom" id="SzX-CG-hOS"/>

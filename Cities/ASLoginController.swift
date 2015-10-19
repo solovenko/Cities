@@ -8,13 +8,14 @@
 
 import UIKit
 
-let myFontSize: CGFloat = 14.0
+let loginViewFontSize: CGFloat = 14.0
 
+var player1: ASPlayer!
+var player2: ASPlayer!
 
 class ASLoginController: UIViewController {
     
-    var player1: ASPlayer!
-    var player2: ASPlayer!
+    
     
     var player1NameLabel: UILabel!
     var player1NameText: UITextField!
@@ -39,10 +40,10 @@ class ASLoginController: UIViewController {
         player2NameText = UITextField()
         
         submitButton.setTitle("OK", forState: UIControlState.Normal)
-//        submitButton.titleLabel?.textColor = UIColor.blackColor()
         submitButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        submitButton.titleLabel?.font = submitButton.titleLabel?.font.fontWithSize(myFontSize)
+        submitButton.titleLabel!.font = submitButton.titleLabel!.font.fontWithSize(loginViewFontSize)
         submitButton.enabled = true
+        
         submitButton.layer.borderColor = UIColor.blueColor().CGColor
         submitButton.layer.borderWidth = 0.5
         submitButton.layer.cornerRadius = 5.0
@@ -50,14 +51,14 @@ class ASLoginController: UIViewController {
         submitButton.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         
         player1NameLabel.text = "Введите имя игрока 1:"
-        player1NameLabel.font = player1NameLabel.font.fontWithSize(myFontSize)
-        player1NameText.font = player1NameText.font!.fontWithSize(myFontSize)
+        player1NameLabel.font = player1NameLabel.font.fontWithSize(loginViewFontSize)
+        player1NameText.font = player1NameText.font!.fontWithSize(loginViewFontSize)
         player1NameText.layer.backgroundColor = UIColor.whiteColor().CGColor
         player1NameText.delegate = self
         
         player2NameLabel.text = "Введите имя игрока 2:"
-        player2NameLabel.font = player2NameLabel.font.fontWithSize(myFontSize)
-        player2NameText.font = player2NameText.font!.fontWithSize(myFontSize)
+        player2NameLabel.font = player2NameLabel.font.fontWithSize(loginViewFontSize)
+        player2NameText.font = player2NameText.font!.fontWithSize(loginViewFontSize)
         player2NameText.layer.backgroundColor = UIColor.whiteColor().CGColor
         player2NameText.delegate = self
         
@@ -83,7 +84,7 @@ class ASLoginController: UIViewController {
             (view.bounds.width - size.width) / 2,
             (view.bounds.height - size.height) / 2 + size.height * 3, size.width * 2, size.height)
         
-        //Player 1
+        // Elements on view about player 1
         size = player1NameLabel.sizeThatFits(CGSizeZero)
         player1NameLabel.frame = CGRectMake(
             (view.bounds.width - size.width) / 2 - size.width / 2,
@@ -96,7 +97,7 @@ class ASLoginController: UIViewController {
             (view.bounds.height - size.height) / 2 - size.height, size.width, size.height)
 
         
-        //Player 2
+        // Elements on view about player 2
         size = player2NameLabel.sizeThatFits(CGSizeZero)
         player2NameLabel.frame = CGRectMake(
             (view.bounds.width - size.width) / 2 - size.width / 2,
@@ -107,19 +108,15 @@ class ASLoginController: UIViewController {
         player2NameText.frame = CGRectMake(
             (view.bounds.width - size.width) / 2 + size.width * 0.75,
             (view.bounds.height - size.height) / 2 + size.height, size.width, size.height)
-        
     }
     
-    
-    /*
-     *   Проверка на правильность ввода имен игроками
-    */
+    // Checking to validity of name
     func isAllowToSegue(player1 player1Name: String?, player2 player2Name: String?) -> Bool {
         
         var isAllowToSegue = true
         
         if let name1 = player1Name where name1.characters.count > 2 {
-            //Если не nil
+            //If not nil
             player1NameLabel.text = "Привет, \(name1)"
         } else {
             isAllowToSegue = false
@@ -127,7 +124,7 @@ class ASLoginController: UIViewController {
         }
         
         if let name2 = player2Name where name2.characters.count > 2 {
-            //Если не nil
+            //If not nil
             player2NameLabel.text = "Привет, \(name2)"
         } else {
             isAllowToSegue = false
@@ -157,20 +154,6 @@ class ASLoginController: UIViewController {
             
             performSegueWithIdentifier("toGameWindowSegue", sender: self)
         }
-        
-        
-//        if var name1 = player1NameText.text {
-//            if var name2 = player2NameText.text {
-//                
-//                var alertView = UIAlertView();
-//                alertView.addButtonWithTitle("Ok");
-//                alertView.title = "Welcome!";
-//                alertView.message = "Hello, \(name1) and \(name2)!";
-//                alertView.show();
-////                submitButton.setTitle("fail", forState: UIControlState.Normal)
-//                
-//            }
-//        }
     }
     
     // MARK: - Navigation
@@ -182,23 +165,10 @@ class ASLoginController: UIViewController {
 //        let gameplayView: ASGameplayController = segue.destinationViewController
         
         if segue.identifier == "toGameWindowSegue" {
-            var gameplayView = segue.destinationViewController as! ASGameplayController;
-            
-            gameplayView.players = (firstPlayer: player1, secondPlayer: player2)
-            
+            var gameplayView = segue.destinationViewController as? ASGameplayController
         }
         
-        /*
-            ASGameplayController* second = segue.destinationController;
-            second.representedObject = self.players;
-            [[[[self view] window] windowController] close];
-        */
-
-        
     }
-    
-    
-
 }
 
 // MARK: - Extension
@@ -215,6 +185,5 @@ extension ASLoginController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
-    
+
 }
