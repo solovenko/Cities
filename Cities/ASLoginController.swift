@@ -13,6 +13,11 @@ let loginViewFontSize: CGFloat = 14.0
 var player1: ASPlayer!
 var player2: ASPlayer!
 
+enum ASTurnPlayer {
+    case ASTurnPlayer1
+    case ASTurnPlayer2
+}
+
 class ASLoginController: UIViewController {
     
     

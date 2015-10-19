@@ -26,6 +26,25 @@
             </objects>
             <point key="canvasLocation" x="77" y="-172"/>
         </scene>
+        <!--End Game Controller-->
+        <scene sceneID="gQE-hk-bGR">
+            <objects>
+                <viewController id="3ck-2t-ZVp" customClass="ASEndGameController" customModule="Cities" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4Fo-po-nwN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Frg-8Q-28x"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rJh-n5-qqH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="1" green="0.96465244419999996" blue="0.73569423639999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d3d-E6-B8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="388" y="649"/>
+        </scene>
         <!--Главное окно-->
         <scene sceneID="62o-Rn-WKc">
             <objects>
@@ -38,12 +57,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.96465244419999996" blue="0.73569423639999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="3ck-2t-ZVp" kind="show" identifier="toEndGameWindowSegue" id="m0f-YI-2Jm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cth-TM-XYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="945" y="589"/>
+            <point key="canvasLocation" x="1211" y="-107"/>
         </scene>
     </scenes>
 </document>

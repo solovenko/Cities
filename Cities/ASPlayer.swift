@@ -11,7 +11,7 @@ import UIKit
 class ASPlayer: NSObject {
     
     var name: String = ""
-    var score: Int = 0
-    var skips: Int = 0
+    var score: UInt16 = 0
+    var skips: UInt8 = 0
 
 }
