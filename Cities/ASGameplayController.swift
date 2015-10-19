@@ -121,13 +121,13 @@ class ASGameplayController: UIViewController {
             (view.bounds.width - size.width) / 2,
             (view.bounds.height - size.height) / 3 + distanceBetweenBodyElements, size.width, size.height)
         
-        gamePreviousCityLabel.text = "Предыдущий город: Астрахань"
+        gamePreviousCityLabel.text = "Предыдущий город:"
         size = gamePreviousCityLabel.sizeThatFits(CGSizeZero)
         gamePreviousCityLabel.frame = CGRectMake(
             (view.bounds.width - size.width) / 2,
             (view.bounds.height - size.height) / 3 + size.height * 2 + distanceBetweenBodyElements, size.width, size.height)
         
-        gameTipLetterLabel.text = "Введите город России на букву: Н"
+        gameTipLetterLabel.text = "Введите город России на букву:"
         size = gameTipLetterLabel.sizeThatFits(CGSizeZero)
         gameTipLetterLabel.frame = CGRectMake(
             (view.bounds.width - size.width) / 2,
@@ -179,6 +179,8 @@ class ASGameplayController: UIViewController {
     
     func startInitialization() {
         
+        listOfCitiesArray = citiesArray
+        
         currentTurn = ASTurnPlayer.ASTurnPlayer1
         
         enterButton = UIButton()
@@ -201,7 +203,7 @@ class ASGameplayController: UIViewController {
         
         gameInputCityTextField = UITextField()
         
-        listOfCitiesArray = [""]
+//        listOfCitiesArray = [""]
         usedCitiesArray = [""]
         
         enterButton.setTitle("Ввести", forState: UIControlState.Normal)
@@ -314,7 +316,7 @@ class ASGameplayController: UIViewController {
                 //Check out letters: "ъ", "ь", "й"
                 
                 var lastLetter: Character = (usedCitiesArray.last?.characters.last)!
-                var index = usedCitiesArray.last!.endIndex.successor()
+                let index = usedCitiesArray.last!.endIndex.successor()
                 
                 if lastLetter == "ъ" || lastLetter == "ь" || lastLetter == "й" {
                     lastLetter = usedCitiesArray.last![index]
@@ -335,7 +337,7 @@ class ASGameplayController: UIViewController {
         var resultString: String = ""
         
         for element in listOfCitiesArray {
-            var length: UInt8 = UInt8(element.characters.count)
+            let length: UInt8 = UInt8(element.characters.count)
             
             if length > 1 && element.lowercaseString == enteredCity?.lowercaseString {
                 isFinden = true
@@ -372,9 +374,9 @@ class ASGameplayController: UIViewController {
                     
                 } else if usedCitiesArray.count > 0 {
                         
-                    var firstLetterInEnterredWord: Character = resultString.lowercaseString.characters.first!
+                    let firstLetterInEnterredWord: Character = resultString.lowercaseString.characters.first!
                     var lastLetterInUsedWord: Character = (usedCitiesArray.last?.characters.last!)!
-                    var index = usedCitiesArray.last!.endIndex.successor()
+                    let index = usedCitiesArray.last!.endIndex.successor()
                     
                     if lastLetterInUsedWord == "ъ" || lastLetterInUsedWord == "ь" || lastLetterInUsedWord == "й" {
                         
