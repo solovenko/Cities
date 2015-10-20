@@ -161,34 +161,21 @@ class ASLoginController: UIViewController {
         }
     }
     
+    /*
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-//        let gameplayView: ASGameplayController = segue.destinationViewController
-        
-//        if segue.identifier == "toGameWindowSegue" {
-//            var gameplayView = segue.destinationViewController as? ASGameplayController
-//        }
-        
     }
+    */
 }
 
 // MARK: - Extension
 extension ASLoginController: UITextFieldDelegate {
     
-//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-//        if let touch = touches.first as? UITouch {
-//            view.endEditing(true)
-//        }
-//        super.touchesBegan(touches, withEvent: event)
-//    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-
 }

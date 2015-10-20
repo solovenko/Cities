@@ -15,7 +15,6 @@ class ASEndGameController: UIViewController {
     var winnerScoreLabel: UILabel!
     
     var playAgainButton: UIButton!
-//    var exitButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +23,6 @@ class ASEndGameController: UIViewController {
         winnerScoreLabel = UILabel()
         
         playAgainButton = UIButton()
-//        exitButton = UIButton()
         
         winnerNameLabel.font = winnerNameLabel.font.fontWithSize(endViewFontSize + 2.0)
         winnerScoreLabel.font = winnerScoreLabel.font.fontWithSize(endViewFontSize)
@@ -36,17 +34,9 @@ class ASEndGameController: UIViewController {
         playAgainButton.titleLabel?.font = playAgainButton.titleLabel?.font.fontWithSize(endViewFontSize - 2.0)
         playAgainButton.addTarget(self, action: "playAgainButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         
-//        exitButton.setTitle("Выйти", forState: UIControlState.Normal)
-//        exitButton.layer.backgroundColor = UIColor.blueColor().CGColor
-//        exitButton.layer.cornerRadius = cornerRadius
-//        exitButton.layer.borderWidth = borderWidth
-//        exitButton.titleLabel?.font = exitButton.titleLabel?.font.fontWithSize(endViewFontSize - 2.0)
-//        exitButton.addTarget(self, action: "exitButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
-        
         view.addSubview(winnerNameLabel)
         view.addSubview(winnerScoreLabel)
         view.addSubview(playAgainButton)
-//        view.addSubview(exitButton)
 
         // Do any additional setup after loading the view.
     }
@@ -75,13 +65,7 @@ class ASEndGameController: UIViewController {
         size = playAgainButton.sizeThatFits(CGSizeZero)
         playAgainButton.frame = CGRectMake(
             (view.bounds.width - size.width) / 2,
-            (view.bounds.height - size.height) * 5 / 6, size.width, size.height)
-        
-//        size = exitButton.sizeThatFits(CGSizeZero)
-//        exitButton.frame = CGRectMake(
-//            (view.bounds.width - size.width) / 2 + size.width,
-//            (view.bounds.height - size.height) * 5 / 6, size.width, size.height)
-        
+            (view.bounds.height - size.height) * 5 / 6, size.width, size.height)        
     }
 
     override func didReceiveMemoryWarning() {

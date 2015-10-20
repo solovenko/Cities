@@ -81,9 +81,7 @@ class ASGameplayController: UIViewController {
         // Getting data list of Russian cities from URL
         
         let data = NSData(contentsOfURL: listOfCitiesURL!)
-        
         let content: String = String(data: data!, encoding: NSUTF8StringEncoding)!
-        
         listOfCitiesArray = content.componentsSeparatedByString("\n")
         
         currentTurn = ASTurnPlayer.ASTurnPlayer1
@@ -108,7 +106,6 @@ class ASGameplayController: UIViewController {
         
         gameInputCityTextField = UITextField()
         
-//        listOfCitiesArray = [""]
         usedCitiesArray = []
         
         enterButton.setTitle("Ввести", forState: UIControlState.Normal)
@@ -260,14 +257,12 @@ class ASGameplayController: UIViewController {
             (view.bounds.width - size.width) / 2 - size.width / 2,
             (view.bounds.height - size.height) / 3 + size.height * 6 + distanceBetweenBodyElements, size.width, size.height)
         
-//        gameInputCityTextField.text = ""
         size = gameInputFieldLabel.sizeThatFits(CGSizeZero)
         gameInputCityTextField.frame = CGRectMake(
             (view.bounds.width - size.width) / 2 + size.width * 0.6,
             (view.bounds.height - size.height) / 3 + size.height * 6 + distanceBetweenBodyElements, size.width + size.width / 4, size.height)
         gameInputCityTextField.delegate = self
         
-//        gameInfoLabel.text = ""
         size = gameInputFieldLabel.sizeThatFits(CGSizeZero)
         gameInfoLabel.frame = CGRectMake(
             (view.bounds.width - size.width - 200) / 2,
@@ -293,15 +288,6 @@ class ASGameplayController: UIViewController {
         // Update information on view
         
         // Header's elements
-        
-        // Scores
-//        player1ScoreLabel.text = "Очки: \(player1.score)"
-//        player2ScoreLabel.text = "Очки: \(player2.score)"
-        
-        // Skips
-//        player1SkipsLabel.text = "Пропуски: \(player1.skips) из \(permittedAmountOfSkips)"
-//        player2SkipsLabel.text = "Пропуски: \(player2.skips) из \(permittedAmountOfSkips)"
-        
         
         if skipFlag {
             
@@ -383,7 +369,6 @@ class ASGameplayController: UIViewController {
                     
                 } else if usedCitiesArray.count > 0 {
                     
-                    print(usedCitiesArray.count)
                     let firstLetterInEnterredWord: Character = resultString.lowercaseString.characters.first!
                     var lastLetterInUsedWord: Character = (usedCitiesArray.last?.characters.last!)!
                     let index = usedCitiesArray.last!.startIndex.advancedBy(usedCitiesArray.last!.characters.count - 2)
@@ -486,13 +471,9 @@ class ASGameplayController: UIViewController {
         
         presentViewController(alertController, animated: true, completion: nil)
         
-//        let alertView = UIAlertView();
-//        alertView.addButtonWithTitle("Ok");
-//        alertView.title = "Welcome!";
-//        alertView.message = "Hello, \(player1.name) and \(player2.name)!";
-//        alertView.show();
     }
-
+    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -500,6 +481,7 @@ class ASGameplayController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
+    */
 }
 
 extension ASGameplayController: UITextFieldDelegate {
