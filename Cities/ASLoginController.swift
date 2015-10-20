@@ -169,9 +169,9 @@ class ASLoginController: UIViewController {
         
 //        let gameplayView: ASGameplayController = segue.destinationViewController
         
-        if segue.identifier == "toGameWindowSegue" {
-            var gameplayView = segue.destinationViewController as? ASGameplayController
-        }
+//        if segue.identifier == "toGameWindowSegue" {
+//            var gameplayView = segue.destinationViewController as? ASGameplayController
+//        }
         
     }
 }

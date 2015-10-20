@@ -24,12 +24,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izB-8N-OCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="-172"/>
+            <point key="canvasLocation" x="331" y="-107"/>
         </scene>
-        <!--End Game Controller-->
+        <!--Конец игры-->
         <scene sceneID="gQE-hk-bGR">
             <objects>
-                <viewController id="3ck-2t-ZVp" customClass="ASEndGameController" customModule="Cities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Конец игры" id="3ck-2t-ZVp" customClass="ASEndGameController" customModule="Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Fo-po-nwN"/>
                         <viewControllerLayoutGuide type="bottom" id="Frg-8Q-28x"/>
@@ -40,10 +40,13 @@
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.96465244419999996" blue="0.73569423639999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="a1i-4x-kJF" kind="show" identifier="toRepeatGameSegue" id="Fv5-Zg-qUW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3d-E6-B8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="649"/>
+            <point key="canvasLocation" x="495" y="733"/>
         </scene>
         <!--Главное окно-->
         <scene sceneID="62o-Rn-WKc">

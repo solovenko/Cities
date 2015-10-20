@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 let gameViewHeaderFontSize: CGFloat = 11.0
 let gameViewBodyFontSize: CGFloat = 13.0
@@ -17,6 +18,8 @@ let buttonFrameWidth: CGFloat = 85
 let distanceBetweenBodyElements: CGFloat = 40
 
 let permittedAmountOfSkips = 3
+
+let listOfCitiesURL = NSURL(string: "http://www.persapps.com/db.txt")
 
 // MARK: - For the test
 let citiesArray = ["Москва", "Барнаул", "Астрахань", "Нягань", "Липецк"]
@@ -37,10 +40,6 @@ class ASGameplayController: UIViewController {
     var player2NameLabel: UILabel!
     var player2ScoreLabel: UILabel!
     var player2SkipsLabel: UILabel!
-    
-//    // Skip counters
-//    var player1SkipCounter: UInt8 = 0
-//    var player2SkipCounter: UInt8 = 0
     
     // Game
     var currentTurn: ASTurnPlayer!
@@ -67,107 +66,7 @@ class ASGameplayController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-//        let alertView = UIAlertView();
-//        alertView.addButtonWithTitle("Ok");
-//        alertView.title = "Welcome!";
-//        alertView.message = "Hello, \(player1.name) and \(player2.name)!";
-//        alertView.show();
-        
-        var size: CGSize // size of element
-        
-        // Elements on view about players (header's elements)
-        
-        player1NameLabel.text = player1.name
-        size = player1NameLabel.sizeThatFits(CGSizeZero)
-        player1NameLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 4 - size.width,
-            (view.bounds.height - size.height) / 6 - size.height, size.width, size.height)
-        
-        player1ScoreLabel.text = "Очки: \(player1.score)"
-        size = player1ScoreLabel.sizeThatFits(CGSizeZero)
-        player1ScoreLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 4  - size.width * 0.87,
-            (view.bounds.height - size.height) / 6 + size.height, size.width, size.height)
-        
-        player1SkipsLabel.text = "Пропуски: \(player1.skips) из \(permittedAmountOfSkips)"
-        size = player1SkipsLabel.sizeThatFits(CGSizeZero)
-        player1SkipsLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 4 - size.width / 4,
-            (view.bounds.height - size.height) / 6 + size.height * 3, size.width, size.height)
-        
-        player2NameLabel.text = player2.name
-        size = player2NameLabel.sizeThatFits(CGSizeZero)
-        player2NameLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) * 3 / 4,
-            (view.bounds.height - size.height) / 6 - size.height, size.width, size.height)
-        
-        player2ScoreLabel.text = "Очки: \(player2.score)"
-        size = player2ScoreLabel.sizeThatFits(CGSizeZero)
-        player2ScoreLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) * 3 / 4,
-            (view.bounds.height - size.height) / 6 + size.height, size.width, size.height)
-        
-        player2SkipsLabel.text = "Пропуски: \(player2.skips) из \(permittedAmountOfSkips)"
-        size = player2SkipsLabel.sizeThatFits(CGSizeZero)
-        player2SkipsLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) * 3 / 4,
-            (view.bounds.height - size.height) / 6 + size.height * 3, size.width, size.height)
-        
-        // Elements on view about game (body's elements)
-        
-        gameTurnLabel.text = "Ход: \(player1.name)"
-        size = gameTurnLabel.sizeThatFits(CGSizeZero)
-        gameTurnLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 2,
-            (view.bounds.height - size.height) / 3 + distanceBetweenBodyElements, size.width, size.height)
-        
-        gamePreviousCityLabel.text = "Предыдущий город:"
-        size = gamePreviousCityLabel.sizeThatFits(CGSizeZero)
-        gamePreviousCityLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 2,
-            (view.bounds.height - size.height) / 3 + size.height * 2 + distanceBetweenBodyElements, size.width, size.height)
-        
-        gameTipLetterLabel.text = "Введите город России на букву:"
-        size = gameTipLetterLabel.sizeThatFits(CGSizeZero)
-        gameTipLetterLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 2,
-            (view.bounds.height - size.height) / 3 + size.height * 4 + distanceBetweenBodyElements, size.width, size.height)
-        
-        gameInputFieldLabel.text = "Поле ввода:"
-        size = gameInputFieldLabel.sizeThatFits(CGSizeZero)
-        gameInputFieldLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 2 - size.width / 2,
-            (view.bounds.height - size.height) / 3 + size.height * 6 + distanceBetweenBodyElements, size.width, size.height)
-        
-        gameInputCityTextField.text = ""
-        size = gameInputFieldLabel.sizeThatFits(CGSizeZero)
-        gameInputCityTextField.frame = CGRectMake(
-            (view.bounds.width - size.width) / 2 + size.width * 0.6,
-            (view.bounds.height - size.height) / 3 + size.height * 6 + distanceBetweenBodyElements, size.width + size.width / 4, size.height)
-        
-        gameInfoLabel.text = ""
-        size = gameInfoLabel.sizeThatFits(CGSizeZero)
-        gameInfoLabel.frame = CGRectMake(
-            (view.bounds.width - size.width) / 2,
-            (view.bounds.height - size.height) / 3 + size.height * 8 + distanceBetweenBodyElements, size.width, size.height)
-        
-        // Elements on view - buttons (footer's elements)
-        
-        size = enterButton.sizeThatFits(CGSizeZero)
-        enterButton.frame = CGRectMake(
-            (view.bounds.width - buttonFrameWidth) / 6 - buttonFrameWidth / 6,
-            (view.bounds.height - size.height) * 5 / 6, buttonFrameWidth, size.height)
-        
-        size = skipButton.sizeThatFits(CGSizeZero)
-        skipButton.frame = CGRectMake(
-            (view.bounds.width - buttonFrameWidth) / 2,
-            (view.bounds.height - size.height) * 5 / 6, buttonFrameWidth, size.height)
-        
-        size = endButton.sizeThatFits(CGSizeZero)
-        endButton.frame = CGRectMake(
-            (view.bounds.width - buttonFrameWidth) * 5 / 6 + buttonFrameWidth / 6,
-            (view.bounds.height - size.height) * 5 / 6, buttonFrameWidth, size.height)
-        
+        update()
     }
 
     override func didReceiveMemoryWarning() {
@@ -179,7 +78,13 @@ class ASGameplayController: UIViewController {
     
     func startInitialization() {
         
-        listOfCitiesArray = citiesArray
+        // Getting data list of Russian cities from URL
+        
+        let data = NSData(contentsOfURL: listOfCitiesURL!)
+        
+        let content: String = String(data: data!, encoding: NSUTF8StringEncoding)!
+        
+        listOfCitiesArray = content.componentsSeparatedByString("\n")
         
         currentTurn = ASTurnPlayer.ASTurnPlayer1
         
@@ -204,7 +109,7 @@ class ASGameplayController: UIViewController {
         gameInputCityTextField = UITextField()
         
 //        listOfCitiesArray = [""]
-        usedCitiesArray = [""]
+        usedCitiesArray = []
         
         enterButton.setTitle("Ввести", forState: UIControlState.Normal)
         enterButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
@@ -257,7 +162,11 @@ class ASGameplayController: UIViewController {
         gameInputFieldLabel.font = gameInputFieldLabel.font.fontWithSize(gameViewBodyFontSize)
         gameInputCityTextField.font = gameInputFieldLabel.font.fontWithSize(gameViewBodyFontSize)
         gameInputCityTextField.backgroundColor = UIColor.whiteColor()
-        gameInfoLabel.font = gameInfoLabel.font.fontWithSize(gameViewBodyFontSize)
+        gameInputCityTextField.text = ""
+        gameInfoLabel.font = gameInfoLabel.font.fontWithSize(gameViewBodyFontSize - 3.0)
+        gameInfoLabel.textAlignment = NSTextAlignment.Center
+        gameInfoLabel.numberOfLines = 0
+        gameInfoLabel.text = ""
         
         view.addSubview(enterButton)
         view.addSubview(skipButton)
@@ -278,29 +187,129 @@ class ASGameplayController: UIViewController {
     
     func update(){
         
-        //Header's elements
+        // Set locate of elements
         
-        //Scores
+        var size: CGSize // size of element
+        
+        // Elements on view about players (header's elements)
+        
+        player1NameLabel.text = player1.name
+        size = player1NameLabel.sizeThatFits(CGSizeZero)
+        player1NameLabel.frame = CGRectMake(
+            (view.bounds.width - size.width) / 4 - size.width,
+            (view.bounds.height - size.height) / 6 - size.height, size.width, size.height)
+        
         player1ScoreLabel.text = "Очки: \(player1.score)"
+        size = player1ScoreLabel.sizeThatFits(CGSizeZero)
+        player1ScoreLabel.frame = CGRectMake(
+            (view.bounds.width - size.width) / 4  - size.width * 0.87,
+            (view.bounds.height - size.height) / 6 + size.height, size.width, size.height)
+        
+        player1SkipsLabel.text = "Пропуски: \(player1.skips) из \(permittedAmountOfSkips)"
+        size = player1SkipsLabel.sizeThatFits(CGSizeZero)
+        player1SkipsLabel.frame = CGRectMake(
+            (view.bounds.width - size.width) / 4 - size.width / 4,
+            (view.bounds.height - size.height) / 6 + size.height * 3, size.width, size.height)
+        
+        player2NameLabel.text = player2.name
+        size = player2NameLabel.sizeThatFits(CGSizeZero)
+        player2NameLabel.frame = CGRectMake(
+            (view.bounds.width - size.width) * 3 / 4,
+            (view.bounds.height - size.height) / 6 - size.height, size.width, size.height)
+        
         player2ScoreLabel.text = "Очки: \(player2.score)"
+        size = player2ScoreLabel.sizeThatFits(CGSizeZero)
+        player2ScoreLabel.frame = CGRectMake(
+            (view.bounds.width - size.width) * 3 / 4,
+            (view.bounds.height - size.height) / 6 + size.height, size.width, size.height)
         
-        //Skips
-        player1SkipsLabel.text = "Пропуски: \(player1.skips) из 5"
-        player2SkipsLabel.text = "Пропуски: \(player2.skips) из 5"
+        player2SkipsLabel.text = "Пропуски: \(player2.skips) из \(permittedAmountOfSkips)"
+        size = player2SkipsLabel.sizeThatFits(CGSizeZero)
+        player2SkipsLabel.frame = CGRectMake(
+            (view.bounds.width - size.width) * 3 / 4,
+            (view.bounds.height - size.height) / 6 + size.height * 3, size.width, size.height)
         
-        //Turn
+        // Elements on view about game (body's elements)
+        
+        // Turn
         switch currentTurn! {
         case .ASTurnPlayer1: gameTurnLabel.text = "Ход: \(player1.name)"
         case .ASTurnPlayer2: gameTurnLabel.text = "Ход: \(player2.name)"
         }
+
+        size = gameTurnLabel.sizeThatFits(CGSizeZero)
+        gameTurnLabel.frame = CGRectMake(
+            (view.bounds.width - size.width - 50) / 2,
+            (view.bounds.height - size.height) / 3 + distanceBetweenBodyElements, size.width + 50, size.height)
+        
+        gamePreviousCityLabel.text = "Предыдущий город:"
+        size = gamePreviousCityLabel.sizeThatFits(CGSizeZero)
+        gamePreviousCityLabel.frame = CGRectMake(
+            (view.bounds.width - size.width - 100) / 2,
+            (view.bounds.height - size.height) / 3 + size.height * 2 + distanceBetweenBodyElements, size.width + 100, size.height)
+        
+        gameTipLetterLabel.text = "Введите город России на букву:"
+        size = gameTipLetterLabel.sizeThatFits(CGSizeZero)
+        gameTipLetterLabel.frame = CGRectMake(
+            (view.bounds.width - size.width - 50) / 2,
+            (view.bounds.height - size.height) / 3 + size.height * 4 + distanceBetweenBodyElements, size.width + 50, size.height)
+        
+        gameInputFieldLabel.text = "Поле ввода:"
+        size = gameInputFieldLabel.sizeThatFits(CGSizeZero)
+        gameInputFieldLabel.frame = CGRectMake(
+            (view.bounds.width - size.width) / 2 - size.width / 2,
+            (view.bounds.height - size.height) / 3 + size.height * 6 + distanceBetweenBodyElements, size.width, size.height)
+        
+//        gameInputCityTextField.text = ""
+        size = gameInputFieldLabel.sizeThatFits(CGSizeZero)
+        gameInputCityTextField.frame = CGRectMake(
+            (view.bounds.width - size.width) / 2 + size.width * 0.6,
+            (view.bounds.height - size.height) / 3 + size.height * 6 + distanceBetweenBodyElements, size.width + size.width / 4, size.height)
+        gameInputCityTextField.delegate = self
+        
+//        gameInfoLabel.text = ""
+        size = gameInputFieldLabel.sizeThatFits(CGSizeZero)
+        gameInfoLabel.frame = CGRectMake(
+            (view.bounds.width - size.width - 200) / 2,
+            (view.bounds.height - size.height * 3) / 3 + size.height * 8 + distanceBetweenBodyElements, size.width + 200, size.height * 3)
+        
+        // Elements on view - buttons (footer's elements)
+        
+        size = enterButton.sizeThatFits(CGSizeZero)
+        enterButton.frame = CGRectMake(
+            (view.bounds.width - buttonFrameWidth) / 6 - buttonFrameWidth / 6,
+            (view.bounds.height - size.height) * 5 / 6, buttonFrameWidth, size.height)
+        
+        size = skipButton.sizeThatFits(CGSizeZero)
+        skipButton.frame = CGRectMake(
+            (view.bounds.width - buttonFrameWidth) / 2,
+            (view.bounds.height - size.height) * 5 / 6, buttonFrameWidth, size.height)
+        
+        size = endButton.sizeThatFits(CGSizeZero)
+        endButton.frame = CGRectMake(
+            (view.bounds.width - buttonFrameWidth) * 5 / 6 + buttonFrameWidth / 6,
+            (view.bounds.height - size.height) * 5 / 6, buttonFrameWidth, size.height)
+        
+        // Update information on view
+        
+        // Header's elements
+        
+        // Scores
+//        player1ScoreLabel.text = "Очки: \(player1.score)"
+//        player2ScoreLabel.text = "Очки: \(player2.score)"
+        
+        // Skips
+//        player1SkipsLabel.text = "Пропуски: \(player1.skips) из \(permittedAmountOfSkips)"
+//        player2SkipsLabel.text = "Пропуски: \(player2.skips) из \(permittedAmountOfSkips)"
+        
         
         if skipFlag {
             
             gameInfoLabel.text = "Предыдущий игрок пропустил ход. \nВведите новое название города"
             
-            //Show name of previous city
+            // Show name of previous city
             if usedCitiesArray != nil && usedCitiesArray.count > 0 {
-                gamePreviousCityLabel.text = "Предыдущий город: \(usedCitiesArray.last)"
+                gamePreviousCityLabel.text = "Предыдущий город: \(usedCitiesArray.last!)"
                 gameTipLetterLabel.text = "Введите город России на любую букву"
                 gameTipLetterLabel.textColor = UIColor.redColor()
             }
@@ -311,12 +320,12 @@ class ASGameplayController: UIViewController {
             gameInfoLabel.text = ""
             
             if usedCitiesArray != nil && usedCitiesArray.count > 0 {
-                gamePreviousCityLabel.text = "Предыдущий город: \(usedCitiesArray.last)"
+                gamePreviousCityLabel.text = "Предыдущий город: \(usedCitiesArray.last!)"
                 
-                //Check out letters: "ъ", "ь", "й"
+                // Check out letters: "ъ", "ь", "й"
                 
                 var lastLetter: Character = (usedCitiesArray.last?.characters.last)!
-                let index = usedCitiesArray.last!.endIndex.successor()
+                let index = usedCitiesArray.last!.endIndex.predecessor()
                 
                 if lastLetter == "ъ" || lastLetter == "ь" || lastLetter == "й" {
                     lastLetter = usedCitiesArray.last![index]
@@ -373,10 +382,11 @@ class ASGameplayController: UIViewController {
                     addBonus()
                     
                 } else if usedCitiesArray.count > 0 {
-                        
+                    
+                    print(usedCitiesArray.count)
                     let firstLetterInEnterredWord: Character = resultString.lowercaseString.characters.first!
                     var lastLetterInUsedWord: Character = (usedCitiesArray.last?.characters.last!)!
-                    let index = usedCitiesArray.last!.endIndex.successor()
+                    let index = usedCitiesArray.last!.startIndex.advancedBy(usedCitiesArray.last!.characters.count - 2)
                     
                     if lastLetterInUsedWord == "ъ" || lastLetterInUsedWord == "ь" || lastLetterInUsedWord == "й" {
                         
@@ -392,7 +402,7 @@ class ASGameplayController: UIViewController {
                             
                     } else {
                             
-                        gameInfoLabel.text = "Ошибка! Введённое название города не начинается с буквы, \nуказанной в конце предыдущего слова!"
+                        gameInfoLabel.text = "Ошибка! \nВведённое название города не начинается с буквы, \nуказанной в конце предыдущего слова!"
                             
                     }
                 } else {
@@ -458,20 +468,19 @@ class ASGameplayController: UIViewController {
     
     func endButtonTapped(sender : UIButton!) {
         
-//        var alert: UIAlert = [[NSAlert alloc] init];
-//        [alert addButtonWithTitle:@"Нет"];
-//        [alert addButtonWithTitle:@"Да"];
-//        [alert setMessageText:@"Вы действительно хотите закончить игру?"];
-//        [alert setInformativeText:@"Подведение итогов игры произойдёт по текущим результатам!"];
-//        [alert setAlertStyle:NSWarningAlertStyle];
-        
+        // Create new alert
         let alertController = UIAlertController(
             title: "Вы действительно хотите закончить игру?",
             message: "Подведение итогов игры произойдёт по текущим результатам!",
             preferredStyle: .Alert)
         
-        let defaultAction = UIAlertAction(title: "Да", style: .Default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Нет", style: .Cancel, handler: nil)
+        // Add buttons to alert
+        let defaultAction = UIAlertAction(title: "Да", style: .Default) { action -> Void in
+            self.performSegueWithIdentifier("toEndGameWindowSegue", sender: self)
+        }
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Нет", style: .Cancel, handler: nil)
+        
         alertController.addAction(defaultAction)
         alertController.addAction(cancelAction)
         
@@ -482,23 +491,6 @@ class ASGameplayController: UIViewController {
 //        alertView.title = "Welcome!";
 //        alertView.message = "Hello, \(player1.name) and \(player2.name)!";
 //        alertView.show();
-        
-        //Переопределение нажатия клавиш на кнопки
-        //Для кнопки "Нет"
-        
-        
-//        UIButton *button  = [[alert buttons]objectAtIndex:0];
-//        [button setKeyEquivalent:@""];
-//        //Для кнопки "Да"
-//        button  = [[alert buttons]objectAtIndex:1];
-//        [button setKeyEquivalent:@"\r"];
-//        
-//        if ([alert runModal] == NSAlertSecondButtonReturn) {
-//            [self doSegue:@"toEndGameWindowSegue"];
-//        }
-        
-//        let button: UIButton = alertView.
-
     }
 
     // MARK: - Navigation
@@ -507,6 +499,14 @@ class ASGameplayController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+    }
+}
+
+extension ASGameplayController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }
